@@ -34,6 +34,7 @@ def load_check(name, config, agentConfig):
     try:
         return check_class(name, init_config=init_config, agentConfig=agentConfig, instances=instances)
     except:
+        raise
         # Backwards compatitiblity for old checks that don't support the
         # instances argument.
         c = check_class(name, init_config=init_config, agentConfig=agentConfig)

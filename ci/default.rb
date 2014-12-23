@@ -3,11 +3,9 @@ require './ci/common'
 namespace :ci do
   namespace :default do
     task :before_install => ['ci:common:before_install'] do
-      apt_update
     end
 
     task :install => ['ci:common:install'] do
-      sh %Q{sudo apt-get install sysstat -qq}
     end
 
     task :before_script => ['ci:common:before_script']
