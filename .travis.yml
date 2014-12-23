@@ -1,3 +1,5 @@
+sudo: false
+
 language: python
 python:
   - "2.6"
@@ -29,6 +31,6 @@ after_failure:
   - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /data/mongod1/mongo.log; fi"
   - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /data/mongod2/mongo.log; fi"
 
-notifications:
-  hipchat:
-    - secure: "DilCAl72f0WU54QIeHzwEfGn2at5+WzEfd3+sFARFyHNje4YLkELnF3iUw5aolaroNUc4Kr0NEYKmpsVQ9EWtKR2DosF2CdMNVv79hntYPyWwU+rfZTRI6NJlnTr1BMUEi7nMraVFDGbpYkXm/qqBPFKp8/cBOHbfNn9m+0dffg="
+#notifications:
+#  hipchat:
+#    - secure: "DilCAl72f0WU54QIeHzwEfGn2at5+WzEfd3+sFARFyHNje4YLkELnF3iUw5aolaroNUc4Kr0NEYKmpsVQ9EWtKR2DosF2CdMNVv79hntYPyWwU+rfZTRI6NJlnTr1BMUEi7nMraVFDGbpYkXm/qqBPFKp8/cBOHbfNn9m+0dffg="
