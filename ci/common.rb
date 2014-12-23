@@ -42,7 +42,7 @@ namespace :ci do
       section('BEFORE_SCRIPT')
       marker_file = '/tmp/COMMON_BEFORE_SCRIPT_DONE'
       unless File.exists?(marker_file)
-        sh "cp $TRAVIS_BUILD_DIR/datadog.conf.example $TRAVIS_BUILD_DIR/datadog.conf"
+        sh "cp $TRAVIS_BUILD_DIR/ci/resources/datadog.conf.example $TRAVIS_BUILD_DIR/datadog.conf"
         sh "touch #{marker_file}"
       else
         puts "Skipping common env setup, already done by another task".yellow
