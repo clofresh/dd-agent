@@ -42,9 +42,7 @@ namespace :ci do
       section('BEFORE_SCRIPT')
       marker_file = '/tmp/COMMON_BEFORE_SCRIPT_DONE'
       unless File.exists?(marker_file)
-        sh "sudo mkdir -p /etc/dd-agent/"
-        sh %Q{sudo install -d -o "$(id -u)" /var/log/datadog}
-        sh "sudo cp $TRAVIS_BUILD_DIR/datadog.conf.example /etc/dd-agent/datadog.conf"
+        sh "cp $TRAVIS_BUILD_DIR/datadog.conf.example $TRAVIS_BUILD_DIR/datadog.conf"
         sh "touch #{marker_file}"
       else
         puts "Skipping common env setup, already done by another task".yellow
