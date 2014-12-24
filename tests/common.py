@@ -33,8 +33,8 @@ def load_check(name, config, agentConfig):
     # init the check class
     try:
         return check_class(name, init_config=init_config, agentConfig=agentConfig, instances=instances)
-    except:
-        raise
+    except Exception as e:
+        raise Exception("Check is using old API, {}".format(e))
         # Backwards compatitiblity for old checks that don't support the
         # instances argument.
         c = check_class(name, init_config=init_config, agentConfig=agentConfig)
