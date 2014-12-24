@@ -28,8 +28,8 @@ namespace :ci do
       section('INSTALL')
       marker_file = '/tmp/COMMON_INSTALL_DONE'
       unless File.exists?(marker_file)
-        sh "pip install -r requirements.txt --use-mirrors 2>&1 >> /tmp/ci.log"
-        sh "pip install -r test-requirements.txt --use-mirrors 2>&1 >> /tmp/ci.log"
+        sh "pip install -r requirements.txt --use-mirrors --download-cache $HOME/.pip-cache 2>&1 >> /tmp/ci.log"
+        sh "pip install -r test-requirements.txt --use-mirrors --download-cache $HOME/.pip-cache 2>&1 >> /tmp/ci.log"
         sh "pip install . --use-mirrors 2>&1 >> /tmp/ci.log"
         sh "touch #{marker_file}"
       else
