@@ -13,6 +13,7 @@ env:
   global:
     - NOSE_FILTER="not windows"
   matrix:
+    fast_finish: true
     - TRAVIS_FLAVOR=default
 #    - TRAVIS_FLAVOR=cache,gearman,database,ssh
 #    - TRAVIS_FLAVOR=cassandra,tomcat,jmx # JMX testing machine / need the other ones before
