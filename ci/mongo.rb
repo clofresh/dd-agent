@@ -6,7 +6,7 @@ namespace :ci do
     end
 
     task :install => ['ci:common:install'] do
-      sh %Q{[ -e $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz ] || curl -L -O $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.6.tgz}
+      sh %Q{[ -e $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz ] || curl -s -L -o $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.6.tgz}
       sh %Q{mkdir -p $HOME/mongo}
       sh %Q{tar zxf $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz -C $HOME/mongo/ --strip-components=1}
     end
