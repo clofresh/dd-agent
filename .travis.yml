@@ -20,10 +20,11 @@ env:
   matrix:
     - TRAVIS_FLAVOR=default
     - TRAVIS_FLAVOR=mongo
+    - TRAVIS_FLAVOR=elasticsearch
 #    - TRAVIS_FLAVOR=ssh
 #    - TRAVIS_FLAVOR=cache,gearman,database,ssh
 #    - TRAVIS_FLAVOR=cassandra,tomcat,jmx # JMX testing machine / need the other ones before
-#    - TRAVIS_FLAVOR=elasticsearch,network,sysstat,webserver
+#    - TRAVIS_FLAVOR=network,sysstat,webserver
 
 # Override travis defaults with empty jobs
 before_install: echo "OVERRIDING TRAVIS STEPS"
@@ -33,6 +34,10 @@ before_script: echo "OVERRIDING TRAVIS STEPS"
 script:
   - bundle install
   - 'rake ci:run'
+
+after_success:
+  - echo "Logs from installation process come here / DEBUG LOGS"
+  - cat /tmp/ci.log
 
 after_failure:
   - echo "Logs from installation process come here / DEBUG LOGS"
