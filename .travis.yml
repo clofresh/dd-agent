@@ -1,6 +1,7 @@
 sudo: false
 
 cache:
+  bundler: true
   directories:
     - $HOME/.pip-cache
     - $HOME/downloads
