@@ -3,6 +3,7 @@ sudo: false
 cache:
   directories:
     - $HOME/.pip-cache
+    - $HOME/downloads
 
 language: python
 python:
