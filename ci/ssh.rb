@@ -3,7 +3,6 @@ require './ci/common'
 namespace :ci do
   namespace :ssh do
     task :before_install => ['ci:common:before_install'] do
-      apt_update
     end
 
     task :install => ['ci:common:install'] do

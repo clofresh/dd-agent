@@ -1,10 +1,6 @@
 require 'colorize'
 require 'time'
 
-def apt_update
-  sh "sudo apt-get update -qq"
-end
-
 def sleep_for(secs)
   puts "Sleeping for #{secs}s".blue
   sleep(secs)
