@@ -2,8 +2,7 @@ require './ci/common'
 
 namespace :ci do
   namespace :mongo do
-    task :before_install => ['ci:common:before_install'] do
-    end
+    task :before_install => ['ci:common:before_install']
 
     task :install => ['ci:common:install'] do
       sh %Q{[ -e $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz ] || curl -s -L -o $HOME/downloads/mongodb-linux-x86_64-2.6.6.tgz https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-2.6.6.tgz}

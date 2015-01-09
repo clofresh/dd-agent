@@ -21,10 +21,12 @@ env:
     - TRAVIS_FLAVOR=default
     - TRAVIS_FLAVOR=mongo
     - TRAVIS_FLAVOR=elasticsearch
+    - TRAVIS_FLAVOR=cassandra
+    - TRAVIS_FLAVOR=sysstat
 #    - TRAVIS_FLAVOR=ssh
 #    - TRAVIS_FLAVOR=cache,gearman,database,ssh
-#    - TRAVIS_FLAVOR=cassandra,tomcat,jmx # JMX testing machine / need the other ones before
-#    - TRAVIS_FLAVOR=network,sysstat,webserver
+#    - TRAVIS_FLAVOR=tomcat,jmx # JMX testing machine / need the other ones before
+#    - TRAVIS_FLAVOR=network,webserver
 
 # Override travis defaults with empty jobs
 before_install: echo "OVERRIDING TRAVIS STEPS"
