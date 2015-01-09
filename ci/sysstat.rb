@@ -10,7 +10,7 @@ namespace :ci do
       sh %Q{tar Jxf $HOME/downloads/sysstat-11.0.1.tar.xz -C $HOME/sysstat/ --strip-components=1}
       sh %Q{mkdir -p $HOME/embedded}
       sh %Q{export PATH=$HOME/embedded/bin:$PATH}
-      sh %Q{cd $HOME/sysstat && ./configure --prefix=$HOME/embedded/ && make && make install}
+      sh %Q{cd $HOME/sysstat && ./configure --prefix=$HOME/embedded/ --disable-man-group && make && make install}
     end
 
     task :before_script => ['ci:common:before_script']
