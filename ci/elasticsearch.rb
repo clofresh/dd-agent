@@ -13,6 +13,7 @@ namespace :ci do
 
     task :before_script => ['ci:common:before_script'] do
       sh %Q{$HOME/elasticsearch/bin/elasticsearch -d}
+      sleep_for 10
     end
 
     task :script => ['ci:common:script'] do
