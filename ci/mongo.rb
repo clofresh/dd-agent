@@ -18,11 +18,11 @@ namespace :ci do
       sh %Q{$HOME/mongo/bin/mongod --port 37018 --dbpath /tmp/mongod2 --replSet rs0/#{hostname}:37017 --logpath /tmp/mongod2/mongo.log --noprealloc --rest --fork}
 
       # Set up the replica set + print some debug info
-      sleep_for(15)
+      sleep_for 15
       sh %Q{$HOME/mongo/bin/mongo --eval "printjson(db.serverStatus())" 'localhost:37017' >> /tmp/mongo.log}
       sh %Q{$HOME/mongo/bin/mongo --eval "printjson(db.serverStatus())" 'localhost:37018' >> /tmp/mongo.log}
       sh %Q{$HOME/mongo/bin/mongo --eval "printjson(rs.initiate()); printjson(rs.conf());" 'localhost:37017' >> /tmp/mongo.log}
-      sleep_for(30)
+      sleep_for 30
       sh %Q{$HOME/mongo/bin/mongo --verbose --eval "printjson(rs.config()); printjson(rs.status());" 'localhost:37017' >> /tmp/mongo.log}
       sh %Q{$HOME/mongo/bin/mongo --verbose --eval "printjson(rs.config()); printjson(rs.status());" 'localhost:37018' >> /tmp/mongo.log}
     end

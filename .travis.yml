@@ -22,7 +22,7 @@ env:
     - TRAVIS_FLAVOR=mongo
     - TRAVIS_FLAVOR=elasticsearch
     - TRAVIS_FLAVOR=cassandra
-    - TRAVIS_FLAVOR=sysstat
+#    - TRAVIS_FLAVOR=sysstat
 #    - TRAVIS_FLAVOR=ssh
 #    - TRAVIS_FLAVOR=cache,gearman,database,ssh
 #    - TRAVIS_FLAVOR=tomcat,jmx # JMX testing machine / need the other ones before
@@ -42,6 +42,13 @@ after_success:
   - cat /tmp/ci.log
 
 after_failure:
+  - echo "Logs from installation process come here / DEBUG LOGS"
+  - cat /tmp/ci.log
+  - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /tmp/mongo.log; fi"
+  - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /data/mongod1/mongo.log; fi"
+  - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /data/mongod2/mongo.log; fi"
+
+after_error:
   - echo "Logs from installation process come here / DEBUG LOGS"
   - cat /tmp/ci.log
   - bash -c "if [[ \"$TRAVIS_FLAVOR\" =~ \"mongo\" ]]; then cat /tmp/mongo.log; fi"
