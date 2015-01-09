@@ -6,8 +6,6 @@ namespace :ci do
     end
 
     task :install => ['ci:common:install'] do
-      # Should be alreday there on Travis though
-      sh %Q{sudo apt-get install openssh-server}
     end
 
     task :before_script => ['ci:common:before_script'] do
