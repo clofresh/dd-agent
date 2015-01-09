@@ -11,7 +11,7 @@ namespace :ci do
       sh %Q{mkdir -p $HOME/embedded}
       sh %Q{mkdir -p $HOME/embedded/var/log/sa}
       sh %Q{export PATH=$HOME/embedded/bin:$PATH}
-      sh %Q{cd $HOME/sysstat && SA_DIR=$HOME/embedded/var/log/sa ./configure --prefix=$HOME/embedded/ --disable-man-group && make && make install}
+      sh %Q{cd $HOME/sysstat && sa_dir=$HOME/embedded/var/log/sa ./configure --prefix=$HOME/embedded/ --disable-man-group && make && make install}
     end
 
     task :before_script => ['ci:common:before_script']
