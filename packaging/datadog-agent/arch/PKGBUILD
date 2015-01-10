@@ -61,11 +61,6 @@ package() {
   mkdir -p $install_dir
   cp -r * "$install_dir/"
 
-  # config file
-  config_dir="$pkgdir/etc/dd-agent"
-  mkdir -p "$config_dir"
-  cp datadog.conf.example "$config_dir/datadog.conf"
-
   # services
   service_dir="$pkgdir/usr/lib/systemd/system"
   install -D -m644 ${srcdir}/dd-agent-forwarder.service "$service_dir/dd-agent-forwarder.service"

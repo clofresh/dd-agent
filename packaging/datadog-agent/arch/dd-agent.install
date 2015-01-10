@@ -1,13 +1,36 @@
 _user=dd-agent
 _group=dd-agent
+_services="dd-agent-forwarder.service dd-agent-collector.service dd-agent-dogstatsd.service"
+_config_file="/etc/dd-agent/datadog.conf"
 
 post_install() {
+    # create user and group
     getent group $_group >/dev/null || groupadd -r $_group
     getent passwd $_user >/dev/null || \
         useradd -r -M -g $_group -d /usr/share/datadog/agent -s /bin/sh \
         -c "Datadog Agent" $_user
+
+    # enable and start processes
+    systemctl enable $_services
+    systemctl start $_services
+
+    # config file
+    if [ ! -e "$_config_file" ]
+    then
+        mkdir -p "$(dirname $_config_file)"
+        cp /usr/share/datadog/agent/datadog.conf.example "$_config_file"
+        chown ${_user}:${_group} "$_config_file"
+        chmod 600 "$_config_file"
+    fi
+}
+
+post_upgrade() {
+    systemctl daemon-reload
+    systemctl reload-or-restart $_services
 }
 
 post_remove() {
+    systemctl stop $_services
+    rm "$_config_file"
     getent passwd $_user > /dev/null && userdel $_user
 }
