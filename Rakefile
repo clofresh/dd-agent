@@ -4,7 +4,6 @@
 require 'rake/clean'
 
 # Flavored Travis CI jobs
-require './ci/cache'
 require './ci/cassandra'
 require './ci/database'
 require './ci/default'
@@ -13,6 +12,7 @@ require './ci/gearman'
 require './ci/jmx'
 require './ci/mongo'
 require './ci/network'
+require './ci/redis'
 require './ci/sysstat'
 require './ci/ssh'
 require './ci/tomcat'
