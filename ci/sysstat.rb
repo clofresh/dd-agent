@@ -10,7 +10,6 @@ namespace :ci do
       sh %Q{tar Jxf $HOME/downloads/sysstat-11.0.1.tar.xz -C $HOME/sysstat/ --strip-components=1}
       sh %Q{mkdir -p $HOME/embedded}
       sh %Q{mkdir -p $HOME/embedded/var/log/sa}
-      sh %Q{export PATH=$HOME/embedded/bin:$PATH}
       sh %Q{cd $HOME/sysstat && conf_dir=$HOME/embedded/etc/sysconfig sa_dir=$HOME/embedded/var/log/sa ./configure --prefix=$HOME/embedded/ --disable-man-group && make && make install}
     end
 

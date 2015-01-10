@@ -61,7 +61,7 @@ namespace :ci do
         nose = "(requires in #{flavor}) and #{filter}"
       end
       # FIXME make the other filters than param configurable
-      sh %Q{nosetests -v -A '#{nose}' tests}
+      sh %Q{PATH=$HOME/embedded/bin:$PATH nosetests -v -A '#{nose}' tests}
       t.reenable
     end
 
