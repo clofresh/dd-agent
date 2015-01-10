@@ -26,6 +26,7 @@ conf.d/*.yaml
 !conf.d/network.yaml
 packaging/build/
 packaging/root/
+packaging/datadog-agent/arch/*.gz
 packaging/datadog-agent/arch/*.xz
 packaging/datadog-agent/arch/pkg
 packaging/datadog-agent/arch/src
