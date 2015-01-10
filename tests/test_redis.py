@@ -17,21 +17,6 @@ MISSING_KEY_TOLERANCE = 0.5
 
 @attr(requires='redis')
 class TestRedis(unittest.TestCase):
-    def wait4(self, p, pattern):
-        """Waits until a specific pattern shows up in the stdout
-        """
-        out = p.stdout
-        loop = 0
-        while True:
-            l = out.readline()
-            if l.find(pattern) > -1:
-                break
-            else:
-                time.sleep(0.1)
-                loop += 1
-                if loop >= MAX_WAIT:
-                    break
-
     def test_redis_auth(self):
         # correct password
         r = load_check('redisdb', {}, {})
@@ -58,8 +43,10 @@ class TestRedis(unittest.TestCase):
             }
         ]
         for instance in instances:
-            r = load_check('redisdb', {}, {})
-            r.check(instance)
+            try:
+                r.check(instance)
+            except Exception as e:
+                self.assertTrue('NOAUTH Authentication required' in str(e))
             metrics = self._sort_metrics(r.get_metrics())
             assert len(metrics) == 0, "Should have failed with bad password; got %s instead" % metrics
 
