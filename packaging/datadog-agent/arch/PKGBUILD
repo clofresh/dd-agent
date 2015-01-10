@@ -71,6 +71,12 @@ package() {
   install -D -m644 ${srcdir}/dd-agent-forwarder.service "$service_dir/dd-agent-forwarder.service"
   install -D -m644 ${srcdir}/dd-agent-collector.service "$service_dir/dd-agent-collector.service"
   install -D -m644 ${srcdir}/dd-agent-dogstatsd.service "$service_dir/dd-agent-dogstatsd.service"
+
+  # licenses
+  for license in LICENSE*
+  do
+    install -D -m644 $license "${pkgdir}/usr/share/licenses/${pkgname}/${license}"
+  done
 }
 
 # vim:set ts=2 sw=2 et:
