@@ -47,12 +47,13 @@ class TestRedis(unittest.TestCase):
         try:
             r.check(instances[0])
         except Exception as e:
-            self.assertTrue('NOAUTH Authentication required' in str(e))
+            self.assertTrue('noauth authentication required' in str(e))
 
         r = load_check('redisdb', {}, {})
-        r.check(instances[1])
-        metrics = self._sort_metrics(r.get_metrics())
-        assert len(metrics) == 0, "Should have failed with bad password; got %s instead" % metrics
+        try:
+            r.check(instances[1])
+        except Exception as e:
+            self.assertTrue('invalid password' in str(e).lower())
 
     def test_redis_default(self):
         port = NOAUTH_PORT
