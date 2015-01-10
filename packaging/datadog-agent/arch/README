@@ -1,0 +1,13 @@
+Enable the services:
+
+```
+sudo systemctl enable dd-agent-forwarder.service dd-agent-collector.service dd-agent-dogstatsd.service
+sudo systemctl start dd-agent-forwarder.service dd-agent-collector.service dd-agent-dogstatsd.service
+```
+
+Check the logs:
+
+```
+journalctl -f -u dd-agent-forwarder.service -u dd-agent-collector.service -u dd-agent-dogstatsd.service
+```
+
