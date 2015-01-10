@@ -1,7 +1,7 @@
 require './ci/common'
 
 namespace :ci do
-  namespace :cache do
+  namespace :redis do
     task :before_install => ['ci:common:before_install']
 
     task :install => ['ci:common:install'] do
