@@ -1,0 +1,13 @@
+_user=dd-agent
+_group=dd-agent
+
+post_install() {
+    getent group $_group >/dev/null || groupadd -r $_group
+    getent passwd $_user >/dev/null || \
+        useradd -r -M -g $_group -d /usr/share/datadog/agent -s /bin/sh \
+        -c "Datadog Agent" $_user
+}
+
+post_remove() {
+    getent passwd $_user > /dev/null && userdel $_user
+}

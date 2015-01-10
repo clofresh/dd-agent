@@ -1,0 +1,11 @@
+[Unit]
+After=network.target
+
+[Service]
+User=dd-agent
+Group=dd-agent
+ExecStart=/usr/share/datadog/agent/venv/bin/python /usr/share/datadog/agent/ddagent.py
+Restart=on-failure
+
+[Install]
+RequiredBy=dd-agent-collector.service dd-agent.dogstatsd.service

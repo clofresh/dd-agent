@@ -1,0 +1,10 @@
+[Unit]
+Requires=dd-agent-forwarder.service
+After=dd-agent-forwarder.service
+
+[Service]
+User=dd-agent
+Group=dd-agent
+ExecStart=/usr/share/datadog/agent/venv/bin/python /usr/share/datadog/agent/agent.py foreground --use-local-forwarder
+Environment=PYTHONPATH='/usr/share/datadog/agent:/usr/share/datadog/agent/agent/checks/libs:$PYTHONPATH'
+Restart=on-failure

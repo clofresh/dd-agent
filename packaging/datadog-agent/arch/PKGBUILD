@@ -10,17 +10,19 @@ arch=('any')
 url="http://www.datadoghq.com/"
 license=('BSD')
 groups=()
-depends=('python2')
+depends=('python2' 'sysstat')
 makedepends=('git' 'ruby' 'ruby-colorize' 'wget' 'python2')
 provides=()
 conflicts=()
 replaces=()
 backup=()
 options=()
-install=
-source=()
+install=dd-agent.install
+source=(dd-agent-collector.service dd-agent-dogstatsd.service dd-agent-forwarder.service)
 noextract=()
-md5sums=() #generate with 'makepkg -g'
+md5sums=('5f5bd79c9a787348dfa1e23402593d92'
+         '1dd0012b9822db65083f4ec4ab66f424'
+         'a11ba507e357c762b5ef314af2e24ac2')
 
 _gitroot=git@github.com:clofresh/dd-agent.git
 _gitname=dd-agent
@@ -55,7 +57,7 @@ build() {
 
 package() {
   cd "$srcdir/$_gitname-build"
-  install_dir="$pkgdir/usr/share/dd-agent"
+  install_dir="$pkgdir/usr/share/datadog/agent"
   mkdir -p $install_dir
   cp -r * "$install_dir/"
 
@@ -63,6 +65,12 @@ package() {
   config_dir="$pkgdir/etc/dd-agent"
   mkdir -p "$config_dir"
   cp datadog.conf.example "$config_dir/datadog.conf"
+
+  # services
+  service_dir="$pkgdir/usr/lib/systemd/system"
+  install -D -m644 ${srcdir}/dd-agent-forwarder.service "$service_dir/dd-agent-forwarder.service"
+  install -D -m644 ${srcdir}/dd-agent-collector.service "$service_dir/dd-agent-collector.service"
+  install -D -m644 ${srcdir}/dd-agent-dogstatsd.service "$service_dir/dd-agent-dogstatsd.service"
 }
 
 # vim:set ts=2 sw=2 et:
