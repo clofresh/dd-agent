@@ -41,15 +41,27 @@ end
 
 desc 'Setup a development environment for the Agent'
 task "setup_env" do
-   `mkdir -p venv`
-   `wget -O venv/virtualenv.py https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py`
-   `python venv/virtualenv.py  --no-site-packages --no-pip --no-setuptools venv/`
-   `wget -O venv/ez_setup.py https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py`
-   `venv/bin/python venv/ez_setup.py`
-   `wget -O venv/get-pip.py https://raw.github.com/pypa/pip/master/contrib/get-pip.py`
-   `venv/bin/python venv/get-pip.py`
-   `venv/bin/pip install -r source-requirements.txt`
-   `venv/bin/pip install -r optional-requirements.txt`
+`
+#!/bin/bash -xe
+
+# Use python2 in case the python binary refers to python 3
+if [[ $(which python2 2>/dev/null) ]]
+then
+  PYTHON=python2
+else
+  PYTHON=python
+fi
+
+mkdir -p venv
+wget -O venv/virtualenv.py https://raw.github.com/pypa/virtualenv/1.11.6/virtualenv.py
+$PYTHON venv/virtualenv.py  --no-site-packages --no-pip --no-setuptools venv/
+wget -O venv/ez_setup.py https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+venv/bin/python venv/ez_setup.py
+wget -O venv/get-pip.py https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+venv/bin/python venv/get-pip.py
+venv/bin/pip install -r source-requirements.txt
+venv/bin/pip install -r optional-requirements.txt
+`
 end
 
 namespace :test do
