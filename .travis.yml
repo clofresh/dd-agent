@@ -18,12 +18,12 @@ env:
   global:
     - NOSE_FILTER="not windows"
   matrix:
-#    - TRAVIS_FLAVOR=default
-#    - TRAVIS_FLAVOR=mongo
-#    - TRAVIS_FLAVOR=elasticsearch
-#    - TRAVIS_FLAVOR=cassandra
-#    - TRAVIS_FLAVOR=sysstat
-     - TRAVIS_FLAVOR=redis
+    - TRAVIS_FLAVOR=default
+    - TRAVIS_FLAVOR=mongo
+    - TRAVIS_FLAVOR=elasticsearch
+    - TRAVIS_FLAVOR=cassandra
+    - TRAVIS_FLAVOR=sysstat
+    - TRAVIS_FLAVOR=redis
 #    MIGRATED to this point
 #    - TRAVIS_FLAVOR=tomcat,jmx # JMX testing machine / need the other ones before
 #    - TRAVIS_FLAVOR=ssh
