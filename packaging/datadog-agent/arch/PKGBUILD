@@ -1,0 +1,68 @@
+# See http://wiki.archlinux.org/index.php/VCS_PKGBUILD_Guidelines
+# for more information on packaging from GIT sources.
+
+# Maintainer: Carlo Cabanilla <carlo@datadoghq.com>
+pkgname=dd-agent-git
+pkgver=master
+pkgrel=1
+pkgdesc=""
+arch=('any')
+url="http://www.datadoghq.com/"
+license=('BSD')
+groups=()
+depends=('python2')
+makedepends=('git' 'ruby' 'ruby-colorize' 'wget' 'python2')
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+source=()
+noextract=()
+md5sums=() #generate with 'makepkg -g'
+
+_gitroot=git@github.com:clofresh/dd-agent.git
+_gitname=dd-agent
+_gitbranch=arch
+
+build() {
+  cd "$srcdir"
+  msg "Connecting to GIT server...."
+
+  if [[ -d "$_gitname" ]]; then
+    cd "$_gitname" && git pull origin
+    msg "The local files are updated."
+  else
+    git clone -b $_gitbranch "$_gitroot" "$_gitname"
+  fi
+
+  msg "GIT checkout done or server timeout"
+  msg "Starting build..."
+
+  rm -rf "$srcdir/$_gitname-build"
+  git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname-build"
+
+  #
+  # BUILD HERE
+  #
+  rake setup_env
+  source venv/bin/activate
+  python setup.py install
+  deactivate
+}
+
+package() {
+  cd "$srcdir/$_gitname-build"
+  install_dir="$pkgdir/usr/share/dd-agent"
+  mkdir -p $install_dir
+  cp -r * "$install_dir/"
+
+  # config file
+  config_dir="$pkgdir/etc/dd-agent"
+  mkdir -p "$config_dir"
+  cp datadog.conf.example "$config_dir/datadog.conf"
+}
+
+# vim:set ts=2 sw=2 et:
