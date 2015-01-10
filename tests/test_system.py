@@ -1,6 +1,7 @@
 import unittest
 from nose.plugins.attrib import attr
 import logging
+import os
 import sys
 
 logging.basicConfig(level=logging.DEBUG)
