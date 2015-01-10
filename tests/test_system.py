@@ -15,6 +15,7 @@ class TestSystem(unittest.TestCase):
     @attr(requires='sysstat')
     def testCPU(self):
         global logger
+        logger.info(os.environ['PATH'])
         cpu = Cpu(logger)
         res = cpu.check({})
         # Make sure we sum up to 100% (or 99% in the case of macs)

@@ -138,7 +138,7 @@ class TestCore(unittest.TestCase):
                 }], val)
         self.assertEquals(len(check.service_checks), 0, check.service_checks)
 
-    @attr(requires='sysstat')
+#    @attr(requires='sysstat')
     def test_collector(self):
         agentConfig = {
             'api_key': 'test_apikey',
