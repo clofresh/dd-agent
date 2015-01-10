@@ -47,7 +47,7 @@ class TestRedis(unittest.TestCase):
         try:
             r.check(instances[0])
         except Exception as e:
-            self.assertTrue('noauth authentication required' in str(e))
+            self.assertTrue('noauth authentication required' in str(e).lower())
 
         r = load_check('redisdb', {}, {})
         try:
